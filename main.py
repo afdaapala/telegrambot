@@ -127,7 +127,7 @@ def cataas():
 def send_cat(message):
 	chat_id = message.chat.id
 	catpic = cataas()
-	bot.send_photo(chat_id, photo=catpic,caption="cataas.com")
+	bot.send_photo(chat_id, photo=catpic,caption="meow!")
 
 @bot.message_handler(commands=["start"])
 def inline(message):
@@ -135,7 +135,7 @@ def inline(message):
 	but_1 = types.InlineKeyboardButton(text="Help", callback_data="Help")
 	but_2 = types.InlineKeyboardButton(text="Cuaca", callback_data="cuaca")
 	but_3 = types.InlineKeyboardButton(text="Hiburan", callback_data="Hiburan")
-	but_4 = types.InlineKeyboardButton(text="Sispak", callback_data="Sispak")
+	but_4 = types.InlineKeyboardButton(text="Cat", callback_data="Cat")
 	but_menu = types.InlineKeyboardButton(text="Main Menu", callback_data="MainMenu")
 	key.add(but_1, but_2, but_3, but_4, but_menu)
 	bot.send_message(message.chat.id, "Halo Bos!, Sehat & Semangat!", reply_markup=key)
@@ -149,8 +149,10 @@ def inline(c):
     bot.send_message(c.message.chat.id, text)
   if c.data == 'Hiburan':
     bot.send_message(c.message.chat.id, 'Hiburan\n')
-  if c.data == 'Kala2':
-    bot.send_message(c.message.chat.id, 'Kala2\n')
+  if c.data == 'Cat':
+    # chat_id = message.chat.id
+	  catpic = cataas()
+	  bot.send_photo(c.message.chat.id, photo=catpic,caption="meow!")
   if c.data == 'MainMenu':
     key = types.InlineKeyboardMarkup()
     but_1 = types.InlineKeyboardButton(text="Help",callback_data="Help")
@@ -163,11 +165,6 @@ def inline(c):
 
 
 @bot.message_handler(commands=['cuaca'])
-def send_weather(message):
-  text = Fcuaca()
-  bot.reply_to(message, text)
-
-@bot.message_handler(commands=['cat'])
 def send_weather(message):
   text = Fcuaca()
   bot.reply_to(message, text)
