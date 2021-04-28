@@ -4,6 +4,7 @@ from telebot import types
 import requests
 from bs4 import BeautifulSoup as bs
 import urllib3
+import random
 
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
@@ -12,8 +13,31 @@ bot = telebot.TeleBot(my_secret)
 
 #message start
 print("Bot telegram DitBOT telah dinyalakan... \nUntuk Menutup, Silahkan menggunakan CTRL+C")
-	
-# print(cont.prettify())
+
+# RANDOM LINKS SONG from dictionary
+song = {
+	'link 1':'https://www.youtube.com/watch?v=CKZvWhCqx1s',
+	'link 2':'https://www.youtube.com/watch?v=hed6HkYNA7g',
+	'link 3':'https://www.youtube.com/watch?v=pNfTK39k55U',
+	'link 4':'https://www.youtube.com/watch?v=wTowEKjDGkU',
+	'link 5':'https://www.youtube.com/watch?v=Ujb-gvqsoi0',
+	'link 6':'https://www.youtube.com/watch?v=sLmLwgxnPUE',
+  'link 7':'https://www.youtube.com/watch?v=wCWoUUWwdqg',
+  'link 8':'https://www.youtube.com/watch?v=UuV2BmJ1p_I',
+  'link 9':'https://www.youtube.com/watch?v=uR8Mrt1IpXg',
+  'link 10':'https://www.youtube.com/watch?v=nM0xDI5R50E',
+  'link 11':'https://www.youtube.com/watch?v=846cjX0ZTrk',
+  'link 12':'https://www.youtube.com/watch?v=EiVmQZwJhsA',
+  'link 13':'https://www.youtube.com/watch?v=42Gtm4-Ax2U',
+  'link 14':'https://www.youtube.com/watch?v=4j7Umwfx60Q',
+  'link 15':'https://www.youtube.com/watch?v=3ymwOvzhwHs',
+  'link 16':'https://www.youtube.com/watch?v=WfYgbFBFe1E',
+  'link 17':'https://www.youtube.com/watch?v=3zQXMPbK5jU',
+  'link 18':'https://www.youtube.com/watch?v=BSS8Y-0hOlY',
+  'link 19':'https://www.youtube.com/watch?v=K9_VFxzCuQ0',
+  'link 20':'https://www.youtube.com/watch?v=b73BI9eUkjM',
+}
+
 waktuFC = {'Dini Hari': '', 'Pagi': '' , 'Siang': '', 'Malam': '','Dini Hari1': '', 'Pagi1': '' , 'Siang1': '', 'Malam1': '','Dini Hari2': '', 'Pagi2': '' , 'Siang2': '', 'Malam2': ''}
 kode = {
 '0': '\U00002600 Cerah / Clear Skies',
@@ -40,8 +64,6 @@ sendhelp = str(
 	'\n /cat - Memberikan gambar kucing random [Cat As A Service]' +
 	'\n /help - Menampilkan bantuan'
 	)
-
-# FCcuaca = ""
 
 def Fcuaca():
   url = "https://data.bmkg.go.id/DataMKG/MEWS/DigitalForecast/DigitalForecast-Banten.xml"
@@ -115,7 +137,6 @@ def Fcuaca():
   waktuFC['Malam2'] +
 
   "\n\nSumber : BMKG"
-
   )
   return FCcuaca
 
@@ -134,7 +155,7 @@ def inline(message):
 	key = types.InlineKeyboardMarkup()
 	but_1 = types.InlineKeyboardButton(text="Help", callback_data="Help")
 	but_2 = types.InlineKeyboardButton(text="Cuaca", callback_data="cuaca")
-	but_3 = types.InlineKeyboardButton(text="Hiburan", callback_data="Hiburan")
+	but_3 = types.InlineKeyboardButton(text="Lagu", callback_data="Lagu")
 	but_4 = types.InlineKeyboardButton(text="Cat", callback_data="Cat")
 	but_menu = types.InlineKeyboardButton(text="Main Menu", callback_data="MainMenu")
 	key.add(but_1, but_2, but_3, but_4, but_menu)
@@ -147,8 +168,9 @@ def inline(c):
   if c.data == 'cuaca':
     text = Fcuaca()
     bot.send_message(c.message.chat.id, text)
-  if c.data == 'Hiburan':
-    bot.send_message(c.message.chat.id, 'Hiburan\n')
+  if c.data == 'Lagu':
+    rsong = random.choice(list(song.values()))
+    bot.send_message(c.message.chat.id, rsong)
   if c.data == 'Cat':
     # chat_id = message.chat.id
 	  catpic = cataas()
@@ -157,17 +179,21 @@ def inline(c):
     key = types.InlineKeyboardMarkup()
     but_1 = types.InlineKeyboardButton(text="Help",callback_data="Help")
     but_2 = types.InlineKeyboardButton(text="Cuaca", callback_data="Cuaca")
-    but_3 = types.InlineKeyboardButton(text="Hiburan", callback_data="Hiburan")
-    but_4 = types.InlineKeyboardButton(text="Sispak", callback_data="Sispak")
+    but_3 = types.InlineKeyboardButton(text="Lagu", callback_data="Lagu")
+    but_4 = types.InlineKeyboardButton(text="Cat", callback_data="Cat")
     but_menu = types.InlineKeyboardButton(text="Main Menu", callback_data="MainMenu")
     key.add(but_1, but_2, but_3, but_4, but_menu)
     bot.send_message(c.message.chat.id, "Main Menu", reply_markup=key)
-
 
 @bot.message_handler(commands=['cuaca'])
 def send_weather(message):
   text = Fcuaca()
   bot.reply_to(message, text)
+
+@bot.message_handler(commands=['lagu'])
+def send_song(message):
+  rsong = random.choice(list(song.values()))
+  bot.reply_to(message, rsong)
 
 @bot.message_handler(commands=['help'])
 def send_help(message):
