@@ -20,22 +20,26 @@ song = {
 	'link 2':'https://www.youtube.com/watch?v=hed6HkYNA7g',
 	'link 3':'https://www.youtube.com/watch?v=pNfTK39k55U',
 	'link 4':'https://www.youtube.com/watch?v=wTowEKjDGkU',
-	'link 5':'https://www.youtube.com/watch?v=Ujb-gvqsoi0',
-	'link 6':'https://www.youtube.com/watch?v=sLmLwgxnPUE',
-  'link 7':'https://www.youtube.com/watch?v=wCWoUUWwdqg',
-  'link 8':'https://www.youtube.com/watch?v=UuV2BmJ1p_I',
-  'link 9':'https://www.youtube.com/watch?v=uR8Mrt1IpXg',
-  'link 10':'https://www.youtube.com/watch?v=nM0xDI5R50E',
-  'link 11':'https://www.youtube.com/watch?v=846cjX0ZTrk',
-  'link 12':'https://www.youtube.com/watch?v=EiVmQZwJhsA',
-  'link 13':'https://www.youtube.com/watch?v=42Gtm4-Ax2U',
-  'link 14':'https://www.youtube.com/watch?v=4j7Umwfx60Q',
-  'link 15':'https://www.youtube.com/watch?v=3ymwOvzhwHs',
-  'link 16':'https://www.youtube.com/watch?v=WfYgbFBFe1E',
-  'link 17':'https://www.youtube.com/watch?v=3zQXMPbK5jU',
-  'link 18':'https://www.youtube.com/watch?v=BSS8Y-0hOlY',
-  'link 19':'https://www.youtube.com/watch?v=K9_VFxzCuQ0',
-  'link 20':'https://www.youtube.com/watch?v=b73BI9eUkjM',
+	'link 5':'https://www.youtube.com/watch?v=Ujb-gvqsoi0', #
+	'link 6':'https://www.youtube.com/watch?v=sLmLwgxnPUE', #
+  'link 7':'https://www.youtube.com/watch?v=wCWoUUWwdqg', #
+  'link 8':'https://www.youtube.com/watch?v=UuV2BmJ1p_I', #
+  'link 9':'https://www.youtube.com/watch?v=uR8Mrt1IpXg', #
+  'link 10':'https://www.youtube.com/watch?v=nM0xDI5R50E', #
+  'link 11':'https://www.youtube.com/watch?v=846cjX0ZTrk', #
+  'link 12':'https://www.youtube.com/watch?v=EiVmQZwJhsA', #
+  'link 13':'https://www.youtube.com/watch?v=42Gtm4-Ax2U', #
+  'link 14':'https://www.youtube.com/watch?v=4j7Umwfx60Q', #
+  'link 15':'https://www.youtube.com/watch?v=3ymwOvzhwHs', #
+  'link 16':'https://www.youtube.com/watch?v=WfYgbFBFe1E', #
+  'link 17':'https://www.youtube.com/watch?v=3zQXMPbK5jU', #
+  'link 18':'https://www.youtube.com/watch?v=BSS8Y-0hOlY', #
+  'link 19':'https://www.youtube.com/watch?v=K9_VFxzCuQ0', #
+  'link 20':'https://www.youtube.com/watch?v=b73BI9eUkjM', #
+  'link 21':'https://www.youtube.com/watch?v=7n9D8ZeOQv0', # Ahpuh IU
+  'link 22':'https://www.youtube.com/watch?v=v7bnOxV4jAc', # lilac IU
+  'link 23':'https://www.youtube.com/watch?v=d9IxdwEFk1c', # palet IU
+  'link 24':'https://www.youtube.com/watch?v=c9E2IT1jHQY', # epilog IU
 }
 
 waktuFC = {'Dini Hari': '', 'Pagi': '' , 'Siang': '', 'Malam': '','Dini Hari1': '', 'Pagi1': '' , 'Siang1': '', 'Malam1': '','Dini Hari2': '', 'Pagi2': '' , 'Siang2': '', 'Malam2': ''}
@@ -60,6 +64,8 @@ sendhelp = str(
 	'Untuk masukkan silahkan kontak @Amardfajri' +
 	'\n\nCommand List' +
 	'\n /start - Menampilkan Menu' +
+  '\n /cuaca - Menampilkan Cuaca 3 hari kedepan' +
+  '\n /citra - Menampilkan Citra Satelit' +
 	'\n /lagu - Memberikan link youtube lagu secara acak' +
 	'\n /cat - Memberikan gambar kucing random [Cat As A Service]' +
 	'\n /help - Menampilkan bantuan'
@@ -67,7 +73,8 @@ sendhelp = str(
 
 def Fcuaca():
   url = "https://data.bmkg.go.id/DataMKG/MEWS/DigitalForecast/DigitalForecast-Banten.xml"
-  response = requests.request("GET",url,verify=False)
+  # response = requests.request("GET",url,verify=False)
+  response = requests.get(url,verify=False)
   r = response.text
   cont = bs(r,"xml")
   contTang = cont.find(id="5002333")
@@ -144,22 +151,21 @@ def cataas():
   catpic = requests.get("https://cataas.com/cat").content
   return catpic
 
-@bot.message_handler(commands=['cat'])
-def send_cat(message):
-	chat_id = message.chat.id
-	catpic = cataas()
-	bot.send_photo(chat_id, photo=catpic,caption="meow!")
+def citra():
+  citraw2 = requests.get("http://202.90.198.22/IMAGE/ANIMASI/H08_EH_Region2_m18.gif", stream=True).content
+  return citraw2
 
 @bot.message_handler(commands=["start"])
 def inline(message):
-	key = types.InlineKeyboardMarkup()
-	but_1 = types.InlineKeyboardButton(text="Help", callback_data="Help")
-	but_2 = types.InlineKeyboardButton(text="Cuaca", callback_data="cuaca")
-	but_3 = types.InlineKeyboardButton(text="Lagu", callback_data="Lagu")
-	but_4 = types.InlineKeyboardButton(text="Cat", callback_data="Cat")
-	but_menu = types.InlineKeyboardButton(text="Main Menu", callback_data="MainMenu")
-	key.add(but_1, but_2, but_3, but_4, but_menu)
-	bot.send_message(message.chat.id, "Halo Bos!, Sehat & Semangat!", reply_markup=key)
+  key = types.InlineKeyboardMarkup()
+  but_1 = types.InlineKeyboardButton(text="Help", callback_data="Help")
+  but_2 = types.InlineKeyboardButton(text="Cuaca", callback_data="cuaca")
+  but_3 = types.InlineKeyboardButton(text="Citra Awan", callback_data="cawan")
+  but_4 = types.InlineKeyboardButton(text="Lagu", callback_data="Lagu")
+  but_5 = types.InlineKeyboardButton(text="Cat", callback_data="Cat")
+  but_menu = types.InlineKeyboardButton(text="Main Menu", callback_data="MainMenu")
+  key.add(but_1, but_2, but_3, but_4, but_5, but_menu)
+  bot.send_message(message.chat.id, "Halo Bos!, Sehat & Semangat!", reply_markup=key)
 
 @bot.callback_query_handler(func=lambda c:True)
 def inline(c):
@@ -171,6 +177,9 @@ def inline(c):
   if c.data == 'Lagu':
     rsong = random.choice(list(song.values()))
     bot.send_message(c.message.chat.id, rsong)
+  if c.data == 'cawan':
+	  cawanw2 = citra()
+	  bot.send_video(c.message.chat.id, cawanw2, supports_streaming=True)
   if c.data == 'Cat':
     # chat_id = message.chat.id
 	  catpic = cataas()
@@ -179,10 +188,11 @@ def inline(c):
     key = types.InlineKeyboardMarkup()
     but_1 = types.InlineKeyboardButton(text="Help",callback_data="Help")
     but_2 = types.InlineKeyboardButton(text="Cuaca", callback_data="Cuaca")
-    but_3 = types.InlineKeyboardButton(text="Lagu", callback_data="Lagu")
-    but_4 = types.InlineKeyboardButton(text="Cat", callback_data="Cat")
+    but_3 = types.InlineKeyboardButton(text="Citra Awan", callback_data="cawan")
+    but_4 = types.InlineKeyboardButton(text="Lagu", callback_data="Lagu")
+    but_5 = types.InlineKeyboardButton(text="Cat", callback_data="Cat")
     but_menu = types.InlineKeyboardButton(text="Main Menu", callback_data="MainMenu")
-    key.add(but_1, but_2, but_3, but_4, but_menu)
+    key.add(but_1, but_2, but_3, but_4, but_5, but_menu)
     bot.send_message(c.message.chat.id, "Main Menu", reply_markup=key)
 
 @bot.message_handler(commands=['cuaca'])
@@ -190,10 +200,21 @@ def send_weather(message):
   text = Fcuaca()
   bot.reply_to(message, text)
 
+@bot.message_handler(commands=['citra'])
+def send_image(message):
+  img = citra()
+  bot.send_video(message.chat.id, img)
+
 @bot.message_handler(commands=['lagu'])
 def send_song(message):
   rsong = random.choice(list(song.values()))
   bot.reply_to(message, rsong)
+
+@bot.message_handler(commands=['cat'])
+def send_cat(message):
+	chat_id = message.chat.id
+	catpic = cataas()
+	bot.send_photo(chat_id, photo=catpic,caption="meow!")
 
 @bot.message_handler(commands=['help'])
 def send_help(message):
