@@ -1,3 +1,4 @@
+from keep_alive import keep_alive
 import os
 import telebot
 from telebot import types
@@ -70,6 +71,8 @@ sendhelp = str(
 	'\n /cat - Memberikan gambar kucing random [Cat As A Service]' +
 	'\n /help - Menampilkan bantuan'
 	)
+
+keep_alive()
 
 def Fcuaca():
   url = "https://data.bmkg.go.id/DataMKG/MEWS/DigitalForecast/DigitalForecast-Banten.xml"
