@@ -118,7 +118,7 @@ def Fcuaca():
   waktuFC['Malam2'] = kode[h66]
 
   FCcuaca = str(
-  "Cuaca [Tangerang Kota]\n-Hari ini- \n Dini Hari : " + 
+  "Cuaca [Tangerang Kota]\n-=Hari ini=- \n Dini Hari : " + 
   waktuFC['Dini Hari'] +
   "\n Pagi : " +
   waktuFC['Pagi'] +
@@ -126,7 +126,7 @@ def Fcuaca():
   waktuFC['Siang'] +
   "\n Malam : " +
   waktuFC['Malam'] +
-  "\n-Besok- \n Dini Hari : " + 
+  "\n\n-=Besok=- \n Dini Hari : " + 
   waktuFC['Dini Hari1'] +
   "\n Pagi : " +
   waktuFC['Pagi1'] +
@@ -134,7 +134,7 @@ def Fcuaca():
   waktuFC['Siang1'] +
   "\n Malam : " +
   waktuFC['Malam1'] +
-  "\n-Lusa- \n Dini Hari : " + 
+  "\n\n-=Lusa=- \n Dini Hari : " + 
   waktuFC['Dini Hari2'] +
   "\n Pagi : " +
   waktuFC['Pagi2'] +
@@ -158,14 +158,14 @@ def citra():
 @bot.message_handler(commands=["start"])
 def inline(message):
   key = types.InlineKeyboardMarkup()
-  but_1 = types.InlineKeyboardButton(text="Help", callback_data="Help")
-  but_2 = types.InlineKeyboardButton(text="Cuaca", callback_data="cuaca")
-  but_3 = types.InlineKeyboardButton(text="Citra Awan", callback_data="cawan")
-  but_4 = types.InlineKeyboardButton(text="Lagu", callback_data="Lagu")
-  but_5 = types.InlineKeyboardButton(text="Cat", callback_data="Cat")
-  but_menu = types.InlineKeyboardButton(text="Main Menu", callback_data="MainMenu")
+  but_1 = types.InlineKeyboardButton(text="\U00002753 Help", callback_data="Help")
+  but_2 = types.InlineKeyboardButton(text="\U0001F324 Cuaca", callback_data="cuaca")
+  but_3 = types.InlineKeyboardButton(text="\U0001F6F0 Citra Awan", callback_data="cawan")
+  but_4 = types.InlineKeyboardButton(text="\U0001F3A7 Lagu", callback_data="Lagu")
+  but_5 = types.InlineKeyboardButton(text="\U0001F63A Cat", callback_data="Cat")
+  but_menu = types.InlineKeyboardButton(text="\U0001F967 Main Menu", callback_data="MainMenu")
   key.add(but_1, but_2, but_3, but_4, but_5, but_menu)
-  bot.send_message(message.chat.id, "Halo Bos!, Sehat & Semangat!", reply_markup=key)
+  bot.send_message(message.chat.id, "\U0001F916 Halo " + message.from_user.first_name + "!, Sehat & Semangat!", reply_markup=key)
 
 @bot.callback_query_handler(func=lambda c:True)
 def inline(c):
