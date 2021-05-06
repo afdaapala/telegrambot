@@ -46,14 +46,14 @@ song = {
 waktuFC = {'Dini Hari': '', 'Pagi': '' , 'Siang': '', 'Malam': '','Dini Hari1': '', 'Pagi1': '' , 'Siang1': '', 'Malam1': '','Dini Hari2': '', 'Pagi2': '' , 'Siang2': '', 'Malam2': ''}
 kode = {
 '0': '\U00002600 Cerah / Clear Skies',
-'1': '\U000026C5 Cerah Berawan / Partly Cloudy',
-'2': '\U000026C5 Cerah Berawan / Partly Cloudy ',
+'1': '\U0001F324 Cerah Berawan / Partly Cloudy',
+'2': '\U0001F324 Cerah Berawan / Partly Cloudy ',
 '3': '\U000026C5 Berawan / Mostly Cloudy',
 '4': '\U00002601 Berawan Tebal / Overcast ',
 '5': '\U0001F301 Udara Kabur / Haze ',
 '10': '\U0001F525 Asap / Smoke',
-'45': '\U0001F301 \U0001F301 Kabut / Fog',
-'60': '\U0001F4A7 Hujan Ringan / Light Rain',
+'45': '\U0001F32B Kabut / Fog',
+'60': '\U0001F326 Hujan Ringan / Light Rain',
 '61': '\U00002614 Hujan Sedang / Rain',
 '63': '\U00002614 \U00002614 Hujan Lebat / Heavy Rain ',
 '80': '\U00002614 Hujan Lokal / Isolated Shower',
